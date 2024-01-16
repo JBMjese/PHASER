@@ -14,18 +14,25 @@ const config = {
         default: "arcade",
         arcade: {
             gravity: {
-                y: 500
+                //y: 500
             }
         }
     }
 }
-var game =  new Phaser.Game(config);
+
+const game =  new Phaser.Game(config);
 
 function preload() {
     this.load.image("emoji", "./assets/southpk.png");
 }
 function create() {
-    this.emoji = this.physics.add.image(80, 100, "emoji");
+    //console.log(Phaser.Input.Keyboard.KeyCodes);
+    this.emoji = this.physics.add.image(100, 50, "emoji");
+    console.log(this.input.keyboard.createCursorKeys());   
+    this.cursor = this.input.keyboard.createCursorKeys();
+    
+    
+    /*
     this.emoji.setScale(1);
     this.emoji.flipx = true;
     this.emoji.setOrigin(0.5);
@@ -33,8 +40,21 @@ function create() {
     this.emoji.setCollideWorldBounds(true);
     this.emoji.setBounce(0.3);
     this.emoji.setVelocity(50, 0);
+    */
     
 }
 function update(time, delta) {
-    //this.emoji.x++;
+    /*if (this.cursor.right.isDown) {
+        this.emoji.setAcceleration(100, 0);
+    };
+    if (this.cursor.right.isUp) {
+        this.emoji.setAcceleration(0, 0);
+        this.emoji.setVelocity(0);
+    }; */
+    //console.log(this.cursor.right.isUp());
+    if(this.cursor.right.isDown) {
+        this.emoji.x++;
+    } else if(this.cursor.left.isDown) {
+        this.emoji.x--;
+    }
 }
